@@ -136,7 +136,7 @@ func handlerSearch(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	fmt.Println("Query took %d milliseconds\n", searchResult.TookInMillis)
+	fmt.Printf("Query took %d milliseconds\n", searchResult.TookInMillis)
 	fmt.Printf("Found a total of %d posts\n", searchResult.TotalHits())
 
 	var typ Post

@@ -27,7 +27,7 @@ const (
 	INDEX    = "around"
 	TYPE     = "post"
 	DISTANCE = "200km"
-	ES_URL   = "http://104.154.30.109:9200/"
+	ES_URL   = "http://35.192.68.212:9200/" //subject change based on GCE IP address
 )
 
 func main() {

@@ -85,7 +85,6 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Received one post request %s\n", r.FormValue("message"))
 	lat, _ := strconv.ParseFloat(r.FormValue("lat"), 64)
 	lon, _ := strconv.ParseFloat(r.FormValue("lon"), 64)
-
 	p := &Post{
 		User:    "1111",
 		Message: r.FormValue("message"),
@@ -99,8 +98,8 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 
 	file, _, err := r.FormFile("image")
 	if err != nil {
-		http.Error(w, "GCS is not setup", http.StatusInternalServerError)
-		fmt.Printf("GCS is not setup %v\n", err)
+		http.Error(w, "Image is not available", http.StatusInternalServerError)
+		fmt.Printf("Image is not available %v.\n", err)
 		panic(err)
 	}
 	defer file.Close()
@@ -149,6 +148,7 @@ func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*stor
 	attrs, err := obj.Attrs(ctx)
 	fmt.Printf("Post is saved to GCS: %s\n", attrs.MediaLink)
 	return obj, attrs, err
+
 }
 
 func saveToES(p *Post, id string) {

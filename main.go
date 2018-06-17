@@ -10,7 +10,6 @@ import (
 	"reflect"
 	"strconv"
 
-	"cloud.google.com/go/bigtable"
 	"cloud.google.com/go/storage"
 	"github.com/auth0/go-jwt-middleware"
 	"github.com/dgrijalva/jwt-go"
@@ -145,7 +144,7 @@ func handlerPost(w http.ResponseWriter, r *http.Request) {
 	saveToES(p, id)
 
 	//Save to BigTable.
-	saveToBigTable(p, id)
+	//saveToBigTable(p, id)
 }
 
 func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*storage.ObjectHandle, *storage.ObjectAttrs, error) {
@@ -180,7 +179,7 @@ func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*stor
 
 }
 
-func saveToBigTable(p *Post, id string) {
+/*func saveToBigTable(p *Post, id string) {
 	ctx := context.Background()
 	// you must update project name here
 	bt_client, err := bigtable.NewClient(ctx, PROJECT_ID, BT_INSTANCE)
@@ -204,7 +203,7 @@ func saveToBigTable(p *Post, id string) {
 		return
 	}
 	fmt.Printf("Post is saved to BigTable: %s\n", p.Message)
-}
+}*/
 
 func saveToES(p *Post, id string) {
 	es_client, err := elastic.NewClient(elastic.SetURL(ES_URL),
